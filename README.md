@@ -1,17 +1,14 @@
 # Game of Life
 
-# Table of Contents
+### Table of Contents
 1. [Description](#description)
 2. [How to Run](#how-to-run)
 3. [Dependencies](#dependencies)
 
 ## Description
-A Python Program that simulates Conway's Game of Life. When run, a window is created displaying a board on which the Game Of Life is run. The board is initialised by default as a square grid of 100x100 cells, each cell has a 20% of initialising alive. This board will iterate to infinity, applying the rules for the Game Of Life between each iteration. Provided `argparse` is installed the board size can be configured with the command line argument `--grid-size=50`.
+A Python Program that simulates Conway's Game of Life. When run, a window is created displaying a board on which the Game Of Life is run. The board is initialised by default as a square grid of 100x100 cells, each cell with a 30% of initialising alive, applying the rules for the Game Of Life between each iteration. By default a toroidal board is created, i.e. a board that wraps around itself. Cells at the edges of the board are neighbours to cells at the same height/width on the opposite edge of the board. The board can be switched to an infinite board by passing in the argument `--infinite=True` next to `python main.py` and any other arguments passed in. When using an infinite board, it will initialise as a standard board, but when an alive cell is found at any edge, the board will grow on all sides by one row during the next iteration. The new cells are dead at initialisation and then the Game of Life rules are applied to them.
 
-This is also true for the type of board initialised. By default a toroidal board is created, i.e. a board that wraps around itself, cells at the edges of the board are neighbours to cells at the same height/width on the opposite edge of the board. The board can be switched to an infinite board by passing in the argument `--infinite=True` next to `python main.py` and any other arguments passed in.
-When using an infinite board, it will initialise as a standard board, but when an alive cell is found at any edge, the board will grow on all sides by one row during the next iteration. The new cells will all be dead at initialisation and then the Game of Life rules are applied to them.
-
-It is also possible to define an initial _"seed"_ board for the Game Of Life. This can be done by passing in the command line argument `--seed=random`. Details of available seeds can be found below. Currently the only available seeds are `random` which initialises a randomise board and `blinker` which initialises a row of 3 live cells in the centre of the board. If you would like to decrease/increase the time between iterations you can pass in the argument `--interval=50` where `50` is the milliseconds between iterations.
+It is also possible to define an initial _"seed"_ board for the Game Of Life. This can be done by passing in the command line argument `--seed=random`. Details of available seeds can be found below. Currently the only available seeds are `random` which initialises a randomise board and `blinker` which initialises a row of 3 live cells in the centre of the board. If you would like to decrease/increase the time between iterations you can pass in the argument `--interval=50` where `50` is the milliseconds between iterations. _(See [Optional Arguments](#optional-arguments) below for further details.)_
 
 ## How to Run
 You can run this program by downloading this repository and running the following command from your console in the repositorys folder
@@ -19,14 +16,15 @@ You can run this program by downloading this repository and running the followin
 python main.py
 ```
 ### Optional Arguments
-If have the python package argparse you can add the following arguments to the command that change the parameters for this Game of Life:
+If have the python package `argparse` you can add the following arguments to the command that change the parameters for this Game of Life:
 - `--grid-size`:
   - **Default =**`100`
-  - This defines the size of the grid the game of life takes place upon
+  - This defines the size of the grid the game of life takes place upon, must be an integer.
   
 - `--infinite`
   - **Default =**`'False'`
   - If this argument is set to `'True'` then the grid will simulate an infinite grid by growing the grid when an alive cell if found at any edge.
+  - You can also use any of the following to initialise an infinite grid: `'true'`, `'Yes'`, `'yes'`, `'On'`, `'on'`,`'Y'`,`'1'`
 - `--seed`
   - **Default =**`'random'`
   - This argument currently accepts the following: 
