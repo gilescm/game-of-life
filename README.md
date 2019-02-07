@@ -34,7 +34,7 @@ python main.py
 ```
 ### Optional Arguments
 If have the python package `argparse` you can add the following arguments to the command that change the parameters for this Game Of Life:
-- `--grid-size`:
+- `--grid-size`
   - **Default =**`100`
   - This defines the size of the grid the Game Of Life takes place upon, must be an integer.
   
