@@ -24,7 +24,7 @@ This Game Of Life applies the following rules to each cell in the grid between i
 - **Rule 0: No Interactions** If a cell is dead and all its neighbours are dead then the cell will stay dead on the next iteration
 - **Rule 1: Underpopulation** If a cell is alive and has less than two alive neighbours then it will die on the next iteration
 - **Rule 2: Overcrowding** If a cell is alive and has more than three alive neighbours then it will die on the next iteration
-- **Rule 3: **Survival** If a cell is alive and has two or three alive neighbours then it will die on the next iteration
+- **Rule 3: Survival** If a cell is alive and has two or three alive neighbours then it will die on the next iteration
 - **Rule 4: Creation Of Life** If a cell is dead and has exactly three alive neighbours then it will become alive on the next iteration
 
 ## How to Run
