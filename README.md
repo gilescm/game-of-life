@@ -2,13 +2,13 @@
 
 # Table of Contents
 1. [Description](#description)
-2. [How to Run](#run)
+2. [How to Run](#how-to-run)
 3. [Dependencies](#dependencies)
 
 ## Description
 A Python Program that simulates Conway's Game of Life
 
-## How to Run <a href="run"></a>
+## How to Run
 You can run this program by downloading this repository and running the following command from your console
 ```
 python main.py
