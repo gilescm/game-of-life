@@ -28,14 +28,22 @@ def Main():
 # command line
 def Arguments():
 
-    # parse arguments 
-    parser = argparse.ArgumentParser(description="Runs Conway's Game of Life simulation.") 
+    AcceptedInfinites = ['True', 'true', 'On', 'on', 'Yes', 'yes', 'Y', '1']
+    AcceptedSeeds     = ['blinker', 'empty', 'void', 'none', 'dead', '0']
 
-    # add arguments 
-    parser.add_argument('--grid-size', dest='N', required=False) 
-    parser.add_argument('--infinite', dest='Infinite', required=False) 
-    parser.add_argument('--interval', dest='Interval', required=False) 
-    parser.add_argument('--seed', dest='Seed', required=False) 
+    Text = {
+        'grid_size': 'An integer N that defines the initial size of the NxN square grid',
+        'infinite' : 'If any of the following then the Game Of Life will be run on a grid of infinite size',
+        'interval' : 'An integer N that defines the time gap in milliseconds between frames when animating the Game Of Life',
+        'seed'     : 'A string value that dictates which seed to use for the initial grid the Game Of Life will be played on'
+    }
+
+    parser = argparse.ArgumentParser(description="Runs Conway's Game of Life simulation.") 
+    parser.add_argument('--grid-size', dest='N', required=False, help=Text['grid_size']) 
+    parser.add_argument('--infinite', dest='Infinite', required=False, choices=AcceptedInfinites, help=Text['infinite']) 
+    parser.add_argument('--interval', dest='Interval', required=False, help=Text['interval']) 
+    parser.add_argument('--seed', dest='Seed', required=False, choices=AcceptedSeeds, help=Text['seed']) 
+
     args = parser.parse_args() 
         
     # Set Grid size 
@@ -46,14 +54,12 @@ def Arguments():
     # Set state of grid. Either Infinite or wrapped
     # If the grid is infinite then it will grow if a live cell if found at any edge 
     Infinite = False
-    AcceptedTerms = ['True', 'true', 'On', 'on', 'Yes', 'yes', 'Y', '1']
-    if args.Infinite in AcceptedTerms: 
+    if args.Infinite in AcceptedInfinites: 
         Infinite = True
 
     # Set the seed for the grid's initial state 
     Seed = 'random'
-    AcceptedTerms = ['blinker', 'empty', 'void', 'none', 'dead', '0']
-    if args.Seed and args.Seed in AcceptedTerms: 
+    if args.Seed and args.Seed in AcceptedSeeds: 
         Seed = args.Seed 
             
     # Set the animation's update interval 
