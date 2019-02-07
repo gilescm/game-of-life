@@ -33,7 +33,7 @@ You can run this program by downloading this repository and running the followin
 python main.py
 ```
 ### Optional Arguments
-If have the python package `argparse` you can add the following arguments to the command that change the parameters for this Game Of Life:
+You can add the following arguments to the command that change the parameters for this Game Of Life:
 - `--grid-size`
   - **Default =**`100`
   - This defines the size of the grid the Game Of Life takes place upon, must be an integer.
@@ -52,13 +52,13 @@ If have the python package `argparse` you can add the following arguments to the
   - This argument sets the interval in milliseconds between frames for the animation
 
 ## Dependencies
-This program requires the `numpy` and `matplotlib` packages to run and is enhanced with some command line arguments if `argparse` is installed. You can install these dependencies by running the command below or installing each one individually. 
+This program requires the `numpy`, `matplotlib` and `argparse` packages to run. You can install these dependencies by running the command below or installing each one individually. 
 ```
 python dependencies.py
 ```
 
 #### argparse
-Optional but required to pass command line arguments. Install with:
+Required to pass command line arguments. This package is included natively in Python versions >=2.3. If you have a lower version of Python then install with:
 ````
 pip install argparse
 ````
