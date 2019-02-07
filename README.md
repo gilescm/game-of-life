@@ -28,7 +28,8 @@ If have the python package `argparse` you can add the following arguments to the
 - `--seed`
   - **Default =**`'random'`
   - This argument currently accepts the following: 
-    - `'blinker'` sets up the initial grid completely empty except for a line of 3 alive cells in the centre of the board
+    - `'blinker'` sets up the initial grid with one line of 3 alive cells in the centre of the board
+    - `'empty'` sets up the initial grid completely empty, you can also use `'void'`, `'none'`, `'dead'` and `'0'` as alternatives to `'empty'`.
 - `--interval`
   - **Default =**`50`
   - This argument sets the interval in milliseconds between frames for the animation

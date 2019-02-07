@@ -148,7 +148,8 @@ def Arguments():
 
     # Set the seed for the grid's initial state 
     Seed = 'random'
-    if args.Seed and Seed == 'blinker': 
+    AcceptedTerms = ['blinker', 'empty', 'void', 'none', 'dead', '0']
+    if args.Seed and args.Seed in AcceptedTerms: 
         Seed = args.Seed 
             
     # Set the animation's update interval 
