@@ -12,7 +12,7 @@ class State:
     def __init__(self, N, Seed='random', Infinite=False):
 
         self.length     = N
-        self.grid       = Num.random.choice(self.Values, self.length*self.length, p=[0, 1]).reshape(self.length, self.length)
+        self.grid       = Num.zeros(self.length*self.length).reshape(self.length, self.length)
         self.isInfinite = Infinite
 
         if Seed == 'random':
