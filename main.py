@@ -142,17 +142,18 @@ def Arguments():
     # Set state of grid. Either Infinite or wrapped
     # If the grid is infinite then it will grow if a live cell if found at any edge 
     Infinite = False
-    if args.Infinite == 'True': 
+    AcceptedTerms = ['True', 'true', 'On', 'on', 'Yes', 'yes', 'Y', '1']
+    if args.Infinite in AcceptedTerms: 
         Infinite = True
 
     # Set the seed for the grid's initial state 
     Seed = 'random'
-    if args.Seed: 
+    if args.Seed and Seed == 'blinker': 
         Seed = args.Seed 
             
     # Set the animation's update interval 
     Interval = 50
-    if args.Interval: 
+    if args.Interval and args.Interval > 0: 
         Interval = int(args.Interval) 
 
     return [N, Infinite, Interval, Seed]
