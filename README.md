@@ -16,14 +16,14 @@ python main.py
 ### Optional Arguments
 If have the python package argparse you can add the following arguments to the command that change the parameters for this Game of Life:
 - `--grid-size`:
-  - **Default = **`100`
+  - **Default =**`100`
   - This defines the size of the grid the game of life takes place upon
   
 - `--infinite`
-  - **Default = **`'False'`
+  - **Default =**`'False'`
   - If this argument is set to `'True'` then the grid will simulate an infinite grid by growing the grid when an alive cell if found at any edge.
 - `--seed`
-  - **Default = **`'random'`
+  - **Default =**`'random'`
   - This argument currently accepts the following: 
     - `'blinker'` sets up the initial grid completely empty except for a line of 3 alive cells in the center
 - `--interval`
