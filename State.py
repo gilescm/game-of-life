@@ -22,7 +22,7 @@ class State:
 
     # Returns a grid with randomised nxn cells
     def Randomise(self): 
-        self.grid = Num.random.choice(self.Values, self.length*self.length, p=[0.15, 0.85]).reshape(self.length, self.length) 
+        self.grid = Num.random.choice(self.Values, self.length*self.length, p=[0.3, 0.7]).reshape(self.length, self.length) 
 
     # Returns a grid equal to the initial state in scenario 5 on the test brief
     def Blinker(self): 
