@@ -1,127 +1,31 @@
-# Imports / Includes
+# 3rd Party Imports / Includes
 import argparse
-import numpy as Num 
 import matplotlib.pyplot as Plot  
 import matplotlib.animation as Animation 
 from   matplotlib.widgets import Button
 
+# Imports / Includes
 import State as S
+import Iteration as I
 
-# Constants / Literals
-ON      = 1
-OFF     = 0
+# Main()
+# Our main function that runs the show
+def Main(): 
 
-# Evolve()
-# Conducts one iteration on our game of life state, creating a new grid if necessary
-# and applies rules to the cells of the grid 
-def Evolve(frameNum, img, objState):
-
-    NextState(objState) 
-    NewGrid = ApplyRules(objState)
-
-    img.set_data(NewGrid)
-    objState.grid = NewGrid
-    return img
-
-# NextState()
-# Returns the next state our game will be in before cells survive/live/die.
-# This new state checks the edges and extends the grid if necessary
-def NextState(objState):
-    NewGrid     = objState.grid.copy()
-    N           = objState.length
-    EdgesToGrow = objState.EdgeCase()
-
-    if EdgesToGrow:
-        VerticalRow   = Num.zeros(N) 
-        HorizontalRow = Num.zeros(N+2).reshape(N+2,1) 
-        NewGrid = Num.vstack((VerticalRow,NewGrid))
-        NewGrid = Num.vstack((NewGrid, VerticalRow))
-        NewGrid = Num.hstack((HorizontalRow, NewGrid))
-        NewGrid = Num.hstack((NewGrid, HorizontalRow))
-        N = N + 2
-
-    objState.grid   = NewGrid
-    objState.length = N
-
-    return objState
-
-# ApplyRules()
-# Apply Scenarios 0 through 4 to each cell on the grid
-# Returns a new grid with those rules applied
-def ApplyRules(objState):
-    NewGrid   = objState.grid.copy()
-    Infinite  = objState.isInfinite
-
-    # If we are using an Infinite grid then we need make sure we do not
-    # performs calculations on cells outside of the grid
-    if Infinite is True:
-        N  = objState.length - 1 
-    else:
-        N  = objState.length
-
-    for i in range(N): 
-        for j in range(N):
-            # Cell in question
-            Cell  = objState.grid[i, j]
-
-            # Total Alive Neighbours
-            Total = Neighbours(i,j, objState.grid, N, Infinite)
-
-            if Cell == ON: 
-                # Underpopulation and Overcrowding
-                if (Total < 2) or (Total > 3): 
-                    NewGrid[i, j] = OFF 
-            else: 
-                # Creation of Life
-                if Total == 3: 
-                    NewGrid[i, j] = ON 
-    return NewGrid
-
-# Neighbours()
-# Calculates how many currently alive neighbours a cell at i,j has
-def Neighbours(i, j, grid, N, Infinite):
+    N, Infinite, Interval, Seed = Arguments()
+    objState = S.State(N, Infinite=Infinite, Seed=Seed)
     
-    if Infinite is False:
-        Total = WrappedTotal(i, j, grid, N)
-    else:
-        Total = InfiniteTotal(i, j, grid)
-    
-    # print(Total)
-    return Total 
+    # Set up animation 
+    fig, ax = Plot.subplots() 
+    img = ax.imshow(objState.grid, interpolation='nearest') 
+    ani = Animation.FuncAnimation(fig, I.Iterate, fargs=(img, objState), 
+                                  frames = 100, interval=Interval) 
+  
+    Plot.show() 
 
-# WrappedTotal()
-# Calculates and returns the total number of alive neighbours for a cell on a grid
-# that wraps around itself
-def WrappedTotal(i, j, grid, N):
-    Total = 0
-
-    Total += grid[(i-1)%N, (j-1)%N] # Top Left
-    Total += grid[i      , (j-1)%N] # Top Mid
-    Total += grid[(i+1)%N, (j-1)%N] # Top Right
-    Total += grid[(i-1)%N, j      ] # Mid Left
-    Total += grid[(i+1)%N, j      ] # Mid Right
-    Total += grid[(i-1)%N, (j+1)%N] # Bot Left
-    Total += grid[i      , (j+1)%N] # Bot Mid
-    Total += grid[(i+1)%N, (j+1)%N] # Bot Right
-
-    return Total
-
-# InfiniteTotal()
-# Calculates and returns the total number of alive neighbours for a cell
-def InfiniteTotal(i, j, grid):
-    Total = 0
-
-    Total += grid[(i-1), (j-1)] # Top Left
-    Total += grid[i    , (j-1)] # Top Mid
-    Total += grid[(i+1), (j-1)] # Top Right
-    Total += grid[(i-1), j    ] # Mid Left
-    Total += grid[(i+1), j    ] # Mid Right
-    Total += grid[(i-1), (j+1)] # Bot Left
-    Total += grid[i    , (j+1)] # Bot Mid
-    Total += grid[(i+1), (j+1)] # Bot Right
-
-    return Total
-
+# Arguments()
+# This is where we define defaults for and set arguments passed in through the
+# command line
 def Arguments():
 
     # parse arguments 
@@ -159,23 +63,6 @@ def Arguments():
 
     return [N, Infinite, Interval, Seed]
 
-# Main()
-# Our main function that runs the show
-def Main(): 
-
-    N, Infinite, Interval, Seed = Arguments()
-    objState = S.State(N, Infinite=Infinite, Seed=Seed)
-    
-    # Set up animation 
-    updateInterval = 50
-    fig, ax = Plot.subplots() 
-    img = ax.imshow(objState.grid, interpolation='nearest') 
-    ani = Animation.FuncAnimation(fig, Evolve, fargs=(img, objState), 
-                                  frames = 100, 
-                                  interval=Interval, 
-                                  save_count=50) 
-  
-    Plot.show() 
  
 if __name__ == '__main__': 
     Main() 

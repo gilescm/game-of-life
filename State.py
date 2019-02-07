@@ -1,9 +1,9 @@
+# 3rd Party Imports / Includes
 import numpy as Num 
 
 # Constants / Literals
 ON      = 1
 OFF     = 0
-
 class State:
 
     Values  = [ON, OFF]
