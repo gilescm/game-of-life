@@ -6,10 +6,13 @@
 3. [Dependencies](#dependencies)
 
 ## Description
-A Python Program that simulates Conway's Game of Life
+A Python Program that simulates Conway's Game of Life. This program requires the `numpy` and `matplotlib` packages to run and is enhanced with some command line arguments if `argparse` is installed. You can install these dependencies by running the command below. _(See also [Dependencies](#dependencies) for individual descriptions/reasons why necessary and download commands.)_ 
+```
+python dependencies.py
+```
 
 ## How to Run
-You can run this program by downloading this repository and running the following command from your console
+You can run this program by downloading this repository and running the following command from your console in the repositorys folder
 ```
 python main.py
 ```
