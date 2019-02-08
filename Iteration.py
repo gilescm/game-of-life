@@ -1,4 +1,4 @@
-# £rd Party Imports / Includes
+# 3rd Party Imports / Includes
 import numpy as Num 
 
 # Imports / Includes
